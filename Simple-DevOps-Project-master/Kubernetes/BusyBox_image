@@ -1,0 +1,26 @@
+//Create a pod called secbusybox with the image busybox which executes command sleep 3600 and makes sure any Containers in the Pod, 
+all processes run with user ID 1000 and with group id 2000 and verify.
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: secbusybox
+  name: secbusybox
+spec:
+  securityContext: # add security context
+    runAsUser: 1000
+    runAsGroup: 2000
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 3600;
+    image: busybox
+    name: secbusybox
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
